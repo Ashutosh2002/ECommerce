@@ -62,8 +62,7 @@ public class FakeStoreProductService implements ProductService{
     }
 
     @Override
-    public boolean deleteProduct(Long productId) {
-        return false;
+    public void deleteProduct(Long productId) {
     }
 
     private static Product convertFakeStoreProductDtoToProduct(FakeStoreProductDTO fakeStoreProductDto) {

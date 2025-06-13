@@ -2,6 +2,7 @@ package com.example.ProductService.controllerAdvice;
 
 import com.example.ProductService.DTOs.ExceptionDTO;
 import com.example.ProductService.DTOs.ProductNotFoundExceptionDTO;
+import com.example.ProductService.exceptions.CategoryNotFoundException;
 import com.example.ProductService.exceptions.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,11 +29,20 @@ public class ProductServiceExceptionHandler {
         // exceptionDto.setProductId(????);
 
 //        e.printStackTrace();
-//        exceptionDto.setProductId(e.getProductId());
+        exceptionDto.setProductId(e.getProductId());
         exceptionDto.setMessage(e.getMessage());
         exceptionDto.setResolution("Please try again with a valid product id");
 
         return new ResponseEntity<>(exceptionDto, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<ExceptionDTO> handleCategoryNotFoundException(CategoryNotFoundException exception){
+        ExceptionDTO exceptionDto = new ExceptionDTO();
+        exceptionDto.setMessage("Category of product not found");
+        exceptionDto.setResolutionDetails("Please mention the category of the product.");
+
+        return new ResponseEntity<>(exceptionDto,HttpStatus.NOT_FOUND);
     }
 
 }

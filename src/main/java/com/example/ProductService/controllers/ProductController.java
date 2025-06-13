@@ -1,6 +1,7 @@
 package com.example.ProductService.controllers;
 
 import com.example.ProductService.DTOs.ExceptionDTO;
+import com.example.ProductService.exceptions.CategoryNotFoundException;
 import com.example.ProductService.exceptions.ProductNotFoundException;
 import com.example.ProductService.models.Product;
 import com.example.ProductService.services.ProductService;
@@ -51,13 +52,13 @@ public class ProductController {
     }
 
     @PostMapping()
-    public Product createProduct(@RequestBody Product product){
-        return new Product();
+    public Product createProduct(@RequestBody Product product) throws CategoryNotFoundException {
+        return productService.createProduct(product);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable("id") Long productId){
-        return null;
+    public void deleteProduct(@PathVariable("id") Long productId){
+        productService.deleteProduct(productId);
     }
 
     @ExceptionHandler(RuntimeException.class)

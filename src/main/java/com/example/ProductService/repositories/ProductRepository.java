@@ -15,6 +15,9 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     @Override
     Optional<Product> findById(Long prodjuctId);
 
+    @Override
+    List<Product> findAll();
+
     //iPhone
     //select * from products where lower(title) LIKE '%iphone%'
     List<Product> findByTitleContainsIgnoreCase(String title);
@@ -30,4 +33,9 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     //JOIN Query
     List<Product> findAllByCategory_Title(String categoryTitle);
 
+//     update + insert => upsert
+    Product save(Product product);
+
+    @Override
+    void deleteById(Long productId);
 }
