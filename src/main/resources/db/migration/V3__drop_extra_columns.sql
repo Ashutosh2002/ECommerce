@@ -1,0 +1,7 @@
+ALTER TABLE products
+DROP
+COLUMN imgurl;
+
+ALTER TABLE products
+DROP
+COLUMN imgURLNew;
