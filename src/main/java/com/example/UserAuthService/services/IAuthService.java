@@ -1,5 +1,6 @@
 package com.example.UserAuthService.services;
 
+import com.example.UserAuthService.models.Token;
 import com.example.UserAuthService.models.User;
 import org.springframework.data.util.Pair;
 
@@ -10,7 +11,7 @@ public interface IAuthService {
                        String password,
                        String phoneNumber);
 
-    public Pair<User,String> login(String email,
-                                   String password);
+    public Token login(String email,
+                       String password);
 
     }

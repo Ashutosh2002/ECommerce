@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>ProductService</artifactId>
+	<artifactId>ECommerce</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ProductService</name>
-	<description>Product Service</description>
+	<name>ECommerce</name>
+	<description>ECommerce Application</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -87,7 +87,20 @@
 			<artifactId>flyway-mysql</artifactId>
 			<version>10.20.1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<version>3.5.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.17.0</version>
+		</dependency>
 	</dependencies>
+
 
 	<build>
 		<plugins>
