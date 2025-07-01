@@ -14,4 +14,6 @@ public interface IAuthService {
     public Token login(String email,
                        String password);
 
-    }
+    User validateToken(String tokenValue);
+
+}

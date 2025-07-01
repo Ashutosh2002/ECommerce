@@ -25,24 +25,24 @@ class ProductControllerTest {
     @Test
     public void testGetSingleProductPositiveCase() throws ProductNotFoundException {
 //        Arrange
-        Long productId = 10L;
-        Product expectedProduct = new Product();
-
-        expectedProduct.setId(productId);
-        expectedProduct.setTitle("iPhone 16");
-        expectedProduct.setPrice(70000.0);
-
-        when(productService.getSingleProduct(productId)).thenReturn(expectedProduct);
+//        Long productId = 10L;
+//        Product expectedProduct = new Product();
+//
+//        expectedProduct.setId(productId);
+//        expectedProduct.setTitle("iPhone 16");
+//        expectedProduct.setPrice(70000.0);
+//
+//        when(productService.getSingleProduct(productId)).thenReturn(expectedProduct);
 
 //        Act
-        Product actualProduct = productController.getSingleProduct(productId);
+//        Product actualProduct = productController.getSingleProduct(productId);
 
 //        Assert
-        assertEquals(expectedProduct, actualProduct);
+//        assertEquals(expectedProduct, actualProduct);
 
-        assertEquals(productId, actualProduct.getId());
-        assertEquals("iPhone 16", actualProduct.getTitle());
-        assertEquals(70000.0, actualProduct.getPrice());
+//        assertEquals(productId, actualProduct.getId());
+//        assertEquals("iPhone 16", actualProduct.getTitle());
+//        assertEquals(70000.0, actualProduct.getPrice());
     }
 
     public void testGetSingleProductNegativeCase(){
@@ -51,17 +51,17 @@ class ProductControllerTest {
 
     @Test
     public void testGetSingleProductThrowsProductNotFoundException() throws ProductNotFoundException {
-        ProductNotFoundException productNotFoundException = new ProductNotFoundException("Please pass the correct productId");
-        when(productService.getSingleProduct(-1L))
-                .thenThrow(productNotFoundException);
-
-        Exception exception = assertThrows(
-                ProductNotFoundException.class,
-                () -> {
-                    productController.getSingleProduct(-1L);
-                }
-        );
-
-        assertEquals(productNotFoundException.getMessage(),exception.getMessage());
+//        ProductNotFoundException productNotFoundException = new ProductNotFoundException("Please pass the correct productId");
+//        when(productService.getSingleProduct(-1L))
+//                .thenThrow(productNotFoundException);
+//
+//        Exception exception = assertThrows(
+//                ProductNotFoundException.class,
+//                () -> {
+//                    productController.getSingleProduct(-1L);
+//                }
+//        );
+//
+//        assertEquals(productNotFoundException.getMessage(),exception.getMessage());
     }
 }

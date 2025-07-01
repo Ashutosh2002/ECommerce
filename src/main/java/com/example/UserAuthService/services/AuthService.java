@@ -1,5 +1,6 @@
 package com.example.UserAuthService.services;
 
+import com.example.UserAuthService.exceptions.InvalidTokenException;
 import com.example.UserAuthService.exceptions.PasswordMismatchException;
 import com.example.UserAuthService.exceptions.UserAlreadyExistException;
 import com.example.UserAuthService.exceptions.UserNotFoundException;
@@ -93,6 +94,19 @@ public class AuthService implements IAuthService{
 
         token.setExpiresAt(dateAfter30Days);
         return tokenRepo.save(token);
+    }
+
+    @Override
+    public User validateToken(String tokenValue) {
+         Optional<Token> tokenOptional = tokenRepo.findByValueAndExpiresAtAfter(tokenValue, new Date());
+
+         if (tokenOptional.isEmpty()) {
+//             Token is invalid or expired
+             throw new InvalidTokenException("Token is invalid or expired!");
+         }
+
+         return tokenOptional.get().getUser();
+
     }
 
 }
