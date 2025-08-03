@@ -20,7 +20,7 @@ public class User extends BaseModel{
     private String phoneNumber;
 
 //    For Many to many cardinality, remove is maybe not appropriate
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
 
 }

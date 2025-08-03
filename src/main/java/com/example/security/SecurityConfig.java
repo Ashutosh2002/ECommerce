@@ -22,6 +22,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
@@ -41,6 +42,12 @@ import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+	BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	public SecurityConfig(BCryptPasswordEncoder bCryptPasswordEncoder) {
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+	}
 
 	@Bean
 	@Order(1)
@@ -86,16 +93,16 @@ public class SecurityConfig {
 		return http.build();
 	}
 
-	@Bean
-	public UserDetailsService userDetailsService() {
-		UserDetails userDetails = User.builder()
-				.username("user")
-				.password("$2a$12$qH/uI13b878Pob2yjQEYD.S3xGwsomJgoxlqO3x6qCkwhwP6lAfmq")
-				.roles("USER")
-				.build();
-
-		return new InMemoryUserDetailsManager(userDetails);
-	}
+//	@Bean
+//	public UserDetailsService userDetailsService() {
+//		UserDetails userDetails = User.builder()
+//				.username("user")
+//				.password(bCryptPasswordEncoder.encode("password"))
+//				.roles("USER")
+//				.build();
+//
+//		return new InMemoryUserDetailsManager(userDetails);
+//	}
 
 //	@Bean
 //	public RegisteredClientRepository registeredClientRepository() {
