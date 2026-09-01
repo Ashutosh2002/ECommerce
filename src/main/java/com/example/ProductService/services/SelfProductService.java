@@ -7,13 +7,17 @@ import com.example.ProductService.models.Product;
 import com.example.ProductService.repositories.CategoryRepository;
 import com.example.ProductService.repositories.ProductRepository;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.print.attribute.standard.PageRanges;
 import java.util.List;
 import java.util.Optional;
 
 @Service("selfProductService")
-//@Primary
+@Primary
 public class SelfProductService implements ProductService{
 
     private ProductRepository productRepository;
@@ -26,10 +30,14 @@ public class SelfProductService implements ProductService{
 
     @Override
     public Product getSingleProduct(Long productId) throws ProductNotFoundException {
+
+
+
         Optional<Product> optionalProduct = productRepository.findById(productId);
         if (optionalProduct.isEmpty()){
             throw new ProductNotFoundException("Product with given id " + productId + " not found.",productId);
         }
+
 
         return optionalProduct.get();
     }
@@ -80,5 +88,17 @@ public class SelfProductService implements ProductService{
     @Override
     public void deleteProduct(Long productId) {
         productRepository.deleteById(productId);
+    }
+
+    @Override
+    public Page<Product> getProductsByTitle(String title, int pageNumber, int pageSize) {
+
+        Sort sort = Sort.by("price").ascending().and(Sort.by("title").descending());
+
+        Page<Product> productPage = productRepository.findByTitleContainsIgnoreCase(
+                title,
+                PageRequest.of(pageNumber, pageSize, sort));
+
+        return productPage;
     }
 }

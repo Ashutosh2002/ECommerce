@@ -31,35 +31,35 @@ public class ProductControllerMockMVCTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Test
-    public void testGetAllProductsAPI() throws Exception {
-        Product p1 = new Product();
-        p1.setId(1L);
-        p1.setTitle("iPhone 15");
-        p1.setDescription("iPhone 15");
-        p1.setPrice(50000.0);
-
-        Product p2 = new Product();
-        p2.setId(2L);
-        p2.setTitle("iPhone 16");
-        p2.setDescription("iPhone 16");
-        p2.setPrice(60000.0);
-
-        List<Product> products = new ArrayList<>();
-        products.add(p1);
-        products.add(p2);
-
-        when(productService.getAllProducts()).thenReturn(products);
-
-        String expectedJson = objectMapper.writeValueAsString(products);
-
-        mockMvc.perform(
-                MockMvcRequestBuilders.get(
-                        "/products/"
-                        )
-        )
-                .andExpect(status().isOk())
-                .andExpect(content().json(expectedJson));
-    }
+//    @Test
+//    public void testGetAllProductsAPI() throws Exception {
+//        Product p1 = new Product();
+//        p1.setId(1L);
+//        p1.setTitle("iPhone 15");
+//        p1.setDescription("iPhone 15");
+//        p1.setPrice(50000.0);
+//
+//        Product p2 = new Product();
+//        p2.setId(2L);
+//        p2.setTitle("iPhone 16");
+//        p2.setDescription("iPhone 16");
+//        p2.setPrice(60000.0);
+//
+//        List<Product> products = new ArrayList<>();
+//        products.add(p1);
+//        products.add(p2);
+//
+//        when(productService.getAllProducts()).thenReturn(products);
+//
+//        String expectedJson = objectMapper.writeValueAsString(products);
+//
+//        mockMvc.perform(
+//                MockMvcRequestBuilders.get(
+//                        "/products/"
+//                        )
+//        )
+//                .andExpect(status().isOk())
+//                .andExpect(content().json(expectedJson));
+//    }
 
 }

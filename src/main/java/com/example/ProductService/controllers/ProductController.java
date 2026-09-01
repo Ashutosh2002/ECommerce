@@ -1,14 +1,16 @@
 package com.example.ProductService.controllers;
 
 import com.example.ProductService.DTOs.ExceptionDTO;
-import com.example.ProductService.commons.AuthCommons;
+//import com.example.ProductService.commons.AuthCommons;
+import com.example.ProductService.commons.ApplicationCommons;
 import com.example.ProductService.exceptions.CategoryNotFoundException;
 import com.example.ProductService.exceptions.ProductNotFoundException;
 import com.example.ProductService.models.Product;
 import com.example.ProductService.services.ProductService;
-import com.example.UserAuthService.dtos.UserDto;
-import com.example.UserAuthService.exceptions.InvalidTokenException;
+//import com.example.UserAuthService.dtos.UserDto;
+//import com.example.UserAuthService.exceptions.InvalidTokenException;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,23 +23,28 @@ import java.util.List;
 public class ProductController {
 
     private ProductService productService;
-    private AuthCommons authCommons;
+//    private AuthCommons authCommons;
+    private ApplicationCommons applicationCommons;
 
     public ProductController(
-//            @Qualifier("selfProductService")
+            @Qualifier("fakeStoreProductService")
             ProductService productService,
-            AuthCommons authCommons
+            ApplicationCommons  applicationCommons
+
+//            AuthCommons authCommons
     ){
         this.productService = productService;
-        this.authCommons = authCommons;
+        this.applicationCommons = applicationCommons;
+//        this.authCommons = authCommons;
     }
 
-    @GetMapping("/{id}/{token}")
+    @GetMapping("/{id}")
     public
 //    ResponseEntity<Product>
     Product
     getSingleProduct(@PathVariable("id") Long productId,
-                     @PathVariable String token) throws ProductNotFoundException {
+                     @RequestHeader (value = "Authorization", required = false) String token
+                     ) throws ProductNotFoundException {
 
 //        ResponseEntity<Product> responseEntity  =
 //                new ResponseEntity<>(
@@ -57,12 +64,13 @@ public class ProductController {
 
 //        return responseEntity;
 
-        UserDto userDto = authCommons.validateToken(token);
+//        UserDto userDto = authCommons.validateToken(token);
+//
+//        if (userDto == null) {
+//            throw new InvalidTokenException("Invalid token provided");
+//        }
 
-        if (userDto == null) {
-            throw new InvalidTokenException("Invalid token provided");
-        }
-
+        applicationCommons.validateToken(token);
         return productService.getSingleProduct(productId);
     }
 
@@ -79,6 +87,12 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable("id") Long productId){
         productService.deleteProduct(productId);
+    }
+
+    @GetMapping("/title/{title}/{pageNumber}/{pageSize}")
+    public Page<Product> getProductsByTitle(@PathVariable("title") String title, @PathVariable("pageNumber") int pageNumber, @PathVariable("pageSize") int pageSize){
+        return productService.getProductsByTitle(title, pageNumber, pageSize);
+
     }
 
     @ExceptionHandler(RuntimeException.class)

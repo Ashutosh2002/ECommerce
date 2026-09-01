@@ -4,8 +4,8 @@ import com.example.ProductService.DTOs.ExceptionDTO;
 import com.example.ProductService.DTOs.ProductNotFoundExceptionDTO;
 import com.example.ProductService.exceptions.CategoryNotFoundException;
 import com.example.ProductService.exceptions.ProductNotFoundException;
-import com.example.UserAuthService.exceptions.InvalidTokenException;
-import com.example.UserAuthService.exceptions.UserAlreadyExistException;
+//import com.example.UserAuthService.exceptions.InvalidTokenException;
+//import com.example.UserAuthService.exceptions.UserAlreadyExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -47,30 +47,30 @@ public class ECommerceExceptionHandler {
         return new ResponseEntity<>(exceptionDto,HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(UserAlreadyExistException.class)
-    public ResponseEntity<ExceptionDTO> handleUserAlreadyExxistException(UserAlreadyExistException e) {
-        ExceptionDTO exceptionDto = new ExceptionDTO();
-        //TODO
-        // exceptionDto.setProductId(????);
-
-//        e.printStackTrace();
-        exceptionDto.setMessage(e.getMessage());
-        exceptionDto.setResolutionDetails("Please try to login with this user");
-
-        return new ResponseEntity<>(exceptionDto, HttpStatus.UNAUTHORIZED);
-    }
-
-
-    @ExceptionHandler(InvalidTokenException.class)
-    public ResponseEntity<ExceptionDTO> handleInvalidTokenException(InvalidTokenException e) {
-        ExceptionDTO exceptionDto = new ExceptionDTO();
-        //TODO
-        // exceptionDto.setProductId(????);
-
-//        e.printStackTrace();
-        exceptionDto.setMessage(e.getMessage());
-        exceptionDto.setResolutionDetails("Token is invalid or expired. Please login again to get a new token.");
-
-        return new ResponseEntity<>(exceptionDto, HttpStatus.UNAUTHORIZED);
-    }
+//    @ExceptionHandler(UserAlreadyExistException.class)
+//    public ResponseEntity<ExceptionDTO> handleUserAlreadyExxistException(UserAlreadyExistException e) {
+//        ExceptionDTO exceptionDto = new ExceptionDTO();
+//        //TODO
+//        // exceptionDto.setProductId(????);
+//
+////        e.printStackTrace();
+//        exceptionDto.setMessage(e.getMessage());
+//        exceptionDto.setResolutionDetails("Please try to login with this user");
+//
+//        return new ResponseEntity<>(exceptionDto, HttpStatus.UNAUTHORIZED);
+//    }
+//
+//
+//    @ExceptionHandler(InvalidTokenException.class)
+//    public ResponseEntity<ExceptionDTO> handleInvalidTokenException(InvalidTokenException e) {
+//        ExceptionDTO exceptionDto = new ExceptionDTO();
+//        //TODO
+//        // exceptionDto.setProductId(????);
+//
+////        e.printStackTrace();
+//        exceptionDto.setMessage(e.getMessage());
+//        exceptionDto.setResolutionDetails("Token is invalid or expired. Please login again to get a new token.");
+//
+//        return new ResponseEntity<>(exceptionDto, HttpStatus.UNAUTHORIZED);
+//    }
 }
